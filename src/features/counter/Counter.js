@@ -8,9 +8,11 @@ import {
   incrementIfOdd,
   selectCount,
 } from './counterSlice';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styles from './Counter.module.css';
 
 export function Counter() {
+  const [open, setOpen] = useState(false);
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
@@ -20,21 +22,21 @@ export function Counter() {
   return (
     <div>
       <div className={styles.row}>
-        <button
-          className={styles.button}
+        <Button
+          color="primary"
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
         >
           -
-        </button>
+        </Button>
         <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
+        <Button
+          color="primary"
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
           +
-        </button>
+        </Button>
       </div>
       <div className={styles.row}>
         <input
@@ -43,25 +45,34 @@ export function Counter() {
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
-        <button
-          className={styles.button}
+        <Button
+          color="primary"
           onClick={() => dispatch(incrementByAmount(incrementValue))}
         >
           Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
+        </Button>
+        <Button
+          color="primary"
           onClick={() => dispatch(incrementAsync(incrementValue))}
         >
           Add Async
-        </button>
-        <button
-          className={styles.button}
+        </Button>
+        <Button
+          color="primary"
           onClick={() => dispatch(incrementIfOdd(incrementValue))}
         >
           Add If Odd
-        </button>
+        </Button>
       </div>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Modal isOpen={open} toggle={() => setOpen(!open)}>
+        <ModalHeader closeButton>
+          <h1>Modal heading</h1>
+        </ModalHeader>
+        <ModalBody>
+          <p> Modal body text goes here.</p>
+        </ModalBody>
+      </Modal>
     </div>
   );
 }
