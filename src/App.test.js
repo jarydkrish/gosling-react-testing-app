@@ -21,7 +21,7 @@ test('renders a button to click', () => {
     </Provider>
   );
 
-  expect(screen.getByText(/0/i)).toBeInTheDocument();
+  expect(screen.getByText(/3/i)).toBeInTheDocument();
 
   expect(screen.getByRole('button', { name: 'Increment value' })).toBeInTheDocument();
   const element = screen.getByRole('button', { name: 'Increment value' });
